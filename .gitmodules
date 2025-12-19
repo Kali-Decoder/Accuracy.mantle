@@ -1,0 +1,6 @@
+[submodule "RBPcontract/lib/openzeppelin-contracts"]
+	path = RBPcontract/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "RBPcontract/lib/forge-std"]
+	path = RBPcontract/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
