@@ -777,7 +777,7 @@ export const PredictionMarketABI = [
 ]
 export const Addresses = {
     "5003" : {  // Mantle Sepolia Testnet
-        "PredictionMarketFactory" : "0x0000000000000000000000000000000000000000",  
+        "PredictionMarketFactory" : "0x5E6658ac6cBC9b0109C28BED00bC4Af0F0A3f1CD",  
         "PredictionMarket" : "0x0000000000000000000000000000000000000000", 
     },
     "5000" : {  // Mantle Mainnet

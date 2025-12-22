@@ -102,6 +102,23 @@ contract PythPriceFeedOracle is Ownable {
     return priceId;
   }
 
+  /**
+   * @dev Read price data from ticker (simple view function)
+   * @param ticker The ticker symbol (e.g., "BTC", "ETH")
+   * @return price18Decimals Price in 18 decimals format
+   */
+  function read(string memory ticker) public view returns (uint price18Decimals) {
+    bytes32 priceFeedId = priceFeedIds[ticker];
+    require(priceFeedId != bytes32(0), "Price feed not found for ticker");
+    
+    PythStructs.Price memory price = pyth.getPriceNoOlderThan(priceFeedId, 60);
+    
+    price18Decimals = (uint(uint64(price.price)) * (10 ** 18)) / 
+      (10 ** uint8(uint32(-1 * price.expo)));
+    
+    return price18Decimals;
+  }
+
   function mint(string memory ticker) public payable {
     uint price18Decimals = getPrice18Decimals(ticker, 60);
 

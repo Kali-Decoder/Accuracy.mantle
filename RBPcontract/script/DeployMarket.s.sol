@@ -6,17 +6,16 @@ import {PredictionMarketFactory} from "../src/PredictionMarketFactory.sol";
 import {PredictionMarket} from "../src/PredictionMarket.sol";
 
 contract DeployMarket is Script {
-    // Example market parameters
-    string public constant MARKET_NAME = "Bitcoin Price Prediction";
-    string public constant MARKET_DESCRIPTION = "Predict the Bitcoin price on December 31, 2024";
-    string public constant IMAGE_URL = "https://example.com/bitcoin.png";
-    string public constant PARAMETER = "Bitcoin Price (USD)";
-    string public constant CATEGORY = "Crypto";
+    string public constant MARKET_NAME = "How much price will MNT hit till this pool ends ?";
+    string public constant MARKET_DESCRIPTION = "Predict the Mantle price on range based prediction";
+    string public constant IMAGE_URL = "https://s2.coinmarketcap.com/static/img/coins/64x64/27075.png";
+    string public constant PARAMETER = "MNT";
+    string public constant CATEGORY = "Coins";
     
-    uint256 public constant MIN_VALUE = 30000; // $30,000
-    uint256 public constant MAX_VALUE = 100000; // $100,000
-    uint256 public constant STEP = 1000; // $1,000 increments
-    uint256 public constant INITIAL_VALUE = 50000; // $50,000
+    uint256 public constant MIN_VALUE = 1; // $30,000
+    uint256 public constant MAX_VALUE = 5; // $100,000
+    uint256 public constant STEP = 1; // $1,000 increments
+    uint256 public constant INITIAL_VALUE = 1; // $50,000
     
     function run() external {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
@@ -35,7 +34,7 @@ contract DeployMarket is Script {
         
         // Calculate market timing
         uint256 startTime = block.timestamp + 1 days;
-        uint256 endTime = block.timestamp + 30 days; // 30 days from now
+        uint256 endTime = block.timestamp + 5 days; // 30 days from now
         
         console.log("Creating new prediction market...");
         console.log("Factory address:", factoryAddress);
