@@ -11,6 +11,7 @@ Accuracy.mantle revolutionizes prediction markets by introducing **range-based b
 - **Range-Based Betting**: Predict within a range instead of exact values
 - **Proportional Rewards**: Earn more when your prediction is more accurate
 - **Fair Distribution**: Transparent reward system that scales with prediction precision
+- **Oracle-Based Transparency**: All prices and market results are determined by decentralized oracles (Pyth Network) for full transparency and trustlessness
 - **Multi-Market Support**: Bet on cryptocurrencies, social media metrics, and more
 - **Real-Time Updates**: Track market status, volume, and participant counts
 - **Wallet Integration**: Connect via RainbowKit with support for multiple wallets
@@ -34,13 +35,21 @@ Accuracy.mantle/
 │   ├── public/           # Static assets
 │   └── package.json
 │
-└── RBPcontract/          # Smart contracts (Foundry)
-    ├── src/              # Solidity source files
-    │   ├── PredictionMarket.sol
-    │   └── PredictionMarketFactory.sol
-    ├── script/           # Deployment scripts
-    ├── test/             # Test files
-    └── foundry.toml      # Foundry configuration
+├── RBPcontract/          # Smart contracts (Foundry)
+│   ├── src/              # Solidity source files
+│   │   ├── PredictionMarket.sol
+│   │   └── PredictionMarketFactory.sol
+│   ├── script/           # Deployment scripts
+│   ├── test/             # Test files
+│   └── foundry.toml      # Foundry configuration
+│
+└── pythoracle/           # Pyth Oracle integration (Hardhat)
+    ├── contracts/        # Oracle contract
+    │   └── PythOracle.sol
+    ├── scripts/          # Oracle scripts
+    │   ├── deploy.ts
+    │   └── getPrice.ts
+    └── hardhat.config.ts
 ```
 
 ## 🚀 Tech Stack
@@ -58,6 +67,12 @@ Accuracy.mantle/
 - **Language**: Solidity
 - **Architecture**: Factory pattern for market creation
 - **Testing**: Forge test suite
+
+### Oracle Integration (pythoracle)
+- **Oracle Provider**: Pyth Network
+- **Framework**: Hardhat
+- **Language**: Solidity, TypeScript
+- **Purpose**: Decentralized price feeds for transparent market resolution
 
 ## 📋 Prerequisites
 
@@ -205,6 +220,53 @@ The platform uses Solidity smart contracts with a factory pattern:
 
 For detailed contract documentation, see [RBPcontract/README.md](./RBPcontract/README.md).
 
+## 🔮 Oracle Integration
+
+**Full Transparency Through Decentralized Oracles**
+
+Accuracy.mantle uses **Pyth Network** as its oracle provider to ensure complete transparency and trustlessness in market resolution. All prices and results are determined on-chain through verified oracle data, eliminating any possibility of manipulation or centralized control.
+
+### How It Works
+
+- **Price Feeds**: Market prices are fetched directly from Pyth Network's decentralized price feeds
+- **On-Chain Verification**: All price data is verified on-chain before market resolution
+- **Transparent Resolution**: Market results are based solely on oracle data, visible to all participants
+- **No Central Authority**: No single entity can manipulate outcomes—everything is verifiable on-chain
+
+### Supported Price Feeds
+
+The oracle supports multiple price feeds including:
+- **BTC/USD**: Bitcoin price feed
+- **ETH/USD**: Ethereum price feed
+- **SOL/USD**: Solana price feed
+- **MNT/USD**: Mantle price feed
+- Additional feeds can be added as needed
+
+### Oracle Contract
+
+The `PythPriceFeedOracle` contract handles:
+- Fetching latest prices from Pyth Network
+- Caching price data for efficient access
+- Converting prices to 18-decimal format for calculations
+- Verifying price freshness and validity
+
+### Using the Oracle
+
+To get prices programmatically:
+
+```typescript
+// Using the getPrice script
+import { getPrice } from './pythoracle/scripts/getPrice';
+
+// Get BTC price
+await getPrice('BTC');
+
+// Get ETH price
+await getPrice('ETH');
+```
+
+For more details, see the [pythoracle](./pythoracle/) directory.
+
 ## 🎮 Usage
 
 ### For Users
@@ -249,6 +311,7 @@ Unlike binary markets, Accuracy uses an inverse divergence algorithm:
 - Predictions closer to the final value receive higher rewards
 - Rewards are distributed proportionally based on accuracy
 - Small losses when close, big wins when precise
+- **Final values are determined by oracle data**—ensuring fair and transparent resolution
 
 ### Market States
 
@@ -259,9 +322,11 @@ Unlike binary markets, Accuracy uses an inverse divergence algorithm:
 
 ### Supported Markets
 
-- Cryptocurrency prices (Bitcoin, Ethereum, Altcoins)
-- Social media metrics (YouTube, Twitter, Instagram, Farcaster)
-- Custom parameters with configurable ranges
+- **Cryptocurrency prices** (Bitcoin, Ethereum, Altcoins) - Resolved via Pyth Network oracle
+- **Social media metrics** (YouTube, Twitter, Instagram, Farcaster)
+- **Custom parameters** with configurable ranges
+
+All cryptocurrency price markets use **verified oracle data** from Pyth Network, ensuring transparent and tamper-proof resolution.
 
 ## 🧪 Testing
 
