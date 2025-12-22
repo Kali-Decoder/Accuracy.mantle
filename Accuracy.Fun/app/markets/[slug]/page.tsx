@@ -813,6 +813,17 @@ function TradingPanelCard({ marketInfo, refetchMarketInfo, refetchAllBets }: { m
                 {formatCurrency(parseFloat(formatEther(BigInt(userBet.amount))))}
               </span>
             </div>
+            {marketInfo?.status === 2 && marketInfo?.finalValue && marketInfo.finalValue > 0 && (
+              <>
+                <div className="h-px bg-zinc-800"></div>
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-mono text-zinc-500 uppercase">Result</span>
+                  <span className="text-sm font-mono font-bold text-orange-400">
+                    ${Number(marketInfo.finalValue).toLocaleString()}
+                  </span>
+                </div>
+              </>
+            )}
             {userBet.rewardAmount && BigInt(userBet.rewardAmount) > BigInt(0) && (
               <>
                 <div className="h-px bg-zinc-800"></div>
@@ -1429,16 +1440,16 @@ function BattleContent({ marketInfo, allBets, refetchMarketInfo, refetchAllBets 
         </div>
       </div>
       <main className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="h-[520px]">
+        <div className="h-[680px]">
           <HeadToHeadStatsCard marketInfo={marketInfo} allBets={allBets} />
         </div>
-        <div className="h-[520px]">
+        <div className="h-[680px]">
           <TradingPanelCard marketInfo={marketInfo} refetchMarketInfo={refetchMarketInfo} refetchAllBets={refetchAllBets} />
         </div>
-        <div className="h-[320px]">
+        <div className="h-[480px]">
           <WinProbabilityCard marketInfo={marketInfo} allBets={allBets} />
         </div>
-        <div className="h-[320px]">
+        <div className="h-[480px]">
           <BattleInfoCard marketInfo={marketInfo} />
         </div>
       </main>

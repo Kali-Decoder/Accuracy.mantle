@@ -6,14 +6,14 @@ import {PredictionMarketFactory} from "../src/PredictionMarketFactory.sol";
 import {PredictionMarket} from "../src/PredictionMarket.sol";
 
 contract DeployMarket is Script {
-    string public constant MARKET_NAME = "How much price will HYPER hit till this pool ends ?";
-    string public constant MARKET_DESCRIPTION = "Predict the HYPER Coin price on range based prediction";
-    string public constant IMAGE_URL = "https://s2.coinmarketcap.com/static/img/coins/64x64/32196.png";
-    string public constant PARAMETER = "HYPE";
+    string public constant MARKET_NAME = "How much price will AVAX hit till this pool ends ?";
+    string public constant MARKET_DESCRIPTION = "Predict the AVAX Coin price on range based prediction";
+    string public constant IMAGE_URL = "https://bin.bnbstatic.com/static/assets/logos/AVAX.png";
+    string public constant PARAMETER = "AVAX";
     string public constant CATEGORY = "Coins";
     
     uint256 public constant MIN_VALUE = 1; // $30,000
-    uint256 public constant MAX_VALUE = 20; // $100,000
+    uint256 public constant MAX_VALUE = 30; // $100,000
     uint256 public constant STEP = 1; // $1,000 increments
     uint256 public constant INITIAL_VALUE = 12; // $50,000
     
@@ -33,8 +33,8 @@ contract DeployMarket is Script {
         PredictionMarketFactory factory = PredictionMarketFactory(factoryAddress);
         
         // Calculate market timing
-        uint256 startTime = block.timestamp + 1 days;
-        uint256 endTime = block.timestamp + 5 days; // 30 days from now
+        uint256 startTime = block.timestamp + 5 minutes;
+        uint256 endTime = block.timestamp + 30 minutes; // 30 days from now
         
         console.log("Creating new prediction market...");
         console.log("Factory address:", factoryAddress);
@@ -71,8 +71,6 @@ contract DeployMarket is Script {
         console.log("Market ID:", factory.getMarketCount() - 1);
         console.log("Status: Pending");
         console.log("Total Markets:", factory.getMarketCount());
-        
-        // Verify market details
         (
             string memory name,
             string memory parameter,

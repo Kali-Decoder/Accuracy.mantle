@@ -52,11 +52,13 @@ export function WalletConnect() {
   const ConnectedWalletButton = ({ 
     account, 
     chain, 
-    openChainModal 
+    openChainModal,
+    betHash
   }: { 
     account: any; 
     chain: any; 
     openChainModal: () => void;
+    betHash?: string;
   }) => {
     // Get balance using wagmi hook - can be called here since component is only rendered when connected
     const { data: balance } = useBalance({
@@ -152,11 +154,11 @@ export function WalletConnect() {
                 <span>Copy Address</span>
               </button>
               <button
-                onClick={() => account.address && viewOnExplorer(account.address)}
-                className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-300 hover:bg-white/10 transition-colors"
+              
+                className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-300 hover:bg-white/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <ExternalLink className="h-4 w-4 text-gray-400" />
-                <span>View on Explorer</span>
+                <span><a href={`https://sepolia.mantlescan.xyz/address/0x5E6658ac6cBC9b0109C28BED00bC4Af0F0A3f1CD`} target="_blank" rel="noopener noreferrer">View on Explorer</a></span>
               </button>
               <button
                 onClick={handleDisconnect}

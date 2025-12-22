@@ -122,6 +122,16 @@ forge verify-contract \
     --chain-id 5003  # Mantle Sepolia Testnet
 ```
 
+### Verify PredictionMarket Contract with Sourcify
+
+To verify a PredictionMarket contract using Sourcify:
+
+```bash
+forge verify-contract --verifier sourcify --chain 5003 0x0781b4F7A51cF91DE7C2a54e7E67785B8930848f PredictionMarket
+```
+
+**Note:** Replace `0x0781b4F7A51cF91DE7C2a54e7E67785B8930848f` with your actual contract address.
+
 ## Post-Deployment
 
 1. **Verify Factory Ownership**: Check that you are the owner
