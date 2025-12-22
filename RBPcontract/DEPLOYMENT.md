@@ -127,7 +127,7 @@ forge verify-contract \
 To verify a PredictionMarket contract using Sourcify:
 
 ```bash
-forge verify-contract --verifier sourcify --chain 5003 0x0781b4F7A51cF91DE7C2a54e7E67785B8930848f PredictionMarket
+forge verify-contract --verifier sourcify --chain 5003 0xf86fe6F78388564BE75E87f4849858688CEF2CfD PredictionMarket
 ```
 
 **Note:** Replace `0x0781b4F7A51cF91DE7C2a54e7E67785B8930848f` with your actual contract address.
