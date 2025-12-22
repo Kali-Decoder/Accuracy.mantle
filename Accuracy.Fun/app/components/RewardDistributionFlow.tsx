@@ -18,7 +18,6 @@ export function RewardDistributionFlow() {
 
   // Example data
   const actualScore = 850;
-  const poolAmount = 400;
   const betAmount = 100;
   const minUsers = 3;
   const bettingPeriod = "7 days";
@@ -30,6 +29,9 @@ export function RewardDistributionFlow() {
     { id: 3, name: "Charlie", predictedScore: 880 },
     { id: 4, name: "Diana", predictedScore: 830 },
   ];
+
+  // Calculate pool amount dynamically: number of users × bet amount
+  const poolAmount = users.length * betAmount;
 
   // Calculate distances
   const usersWithCalculations = users.map((user) => {

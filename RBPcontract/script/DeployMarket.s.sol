@@ -6,16 +6,16 @@ import {PredictionMarketFactory} from "../src/PredictionMarketFactory.sol";
 import {PredictionMarket} from "../src/PredictionMarket.sol";
 
 contract DeployMarket is Script {
-    string public constant MARKET_NAME = "How much price will MNT hit till this pool ends ?";
-    string public constant MARKET_DESCRIPTION = "Predict the Mantle price on range based prediction";
-    string public constant IMAGE_URL = "https://s2.coinmarketcap.com/static/img/coins/64x64/27075.png";
-    string public constant PARAMETER = "MNT";
+    string public constant MARKET_NAME = "How much price will HYPER hit till this pool ends ?";
+    string public constant MARKET_DESCRIPTION = "Predict the HYPER Coin price on range based prediction";
+    string public constant IMAGE_URL = "https://s2.coinmarketcap.com/static/img/coins/64x64/32196.png";
+    string public constant PARAMETER = "HYPE";
     string public constant CATEGORY = "Coins";
     
     uint256 public constant MIN_VALUE = 1; // $30,000
-    uint256 public constant MAX_VALUE = 5; // $100,000
+    uint256 public constant MAX_VALUE = 20; // $100,000
     uint256 public constant STEP = 1; // $1,000 increments
-    uint256 public constant INITIAL_VALUE = 1; // $50,000
+    uint256 public constant INITIAL_VALUE = 12; // $50,000
     
     function run() external {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
