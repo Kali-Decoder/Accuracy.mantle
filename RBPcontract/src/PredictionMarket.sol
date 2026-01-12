@@ -146,7 +146,7 @@ contract PredictionMarket is ReentrancyGuard {
         maxValue = _maxValue;
         step = _step;
         initialValue = _initialValue;
-        status = MarketStatus.Pending;
+        status = MarketStatus.Pending; // should be active when deployed
     }
 
     // ============================================

@@ -61,21 +61,29 @@ export default function MarketsPage() {
       return [];
     }
 
-    if (selectedCategory === "all") {
-      return transformedMarkets;
+    let filtered = transformedMarkets;
+
+    // Filter by category if not "all"
+    if (selectedCategory !== "all") {
+      filtered = transformedMarkets.filter((market) => {
+        if (selectedCategory === "pending") {
+          return market.status === 0; // Pending markets
+        } else if (selectedCategory === "active") {
+          return market.status === 1; // Active markets
+        } else if (selectedCategory === "resolved") {
+          return market.status === 2; // Resolved markets
+        } else if (selectedCategory === "cancelled") {
+          return market.status === 3; // Cancelled markets
+        }
+        return true;
+      });
     }
 
-    return transformedMarkets.filter((market) => {
-      if (selectedCategory === "pending") {
-        return market.status === 0; // Pending markets
-      } else if (selectedCategory === "active") {
-        return market.status === 1; // Active markets
-      } else if (selectedCategory === "resolved") {
-        return market.status === 2; // Resolved markets
-      } else if (selectedCategory === "cancelled") {
-        return market.status === 3; // Cancelled markets
-      }
-      return true;
+    // Sort by startTime (most recent first) - descending order
+    return filtered.sort((a, b) => {
+      const timeA = Number(a.startTime) || 0;
+      const timeB = Number(b.startTime) || 0;
+      return timeB - timeA; // Descending order (most recent first)
     });
   }, [transformedMarkets, selectedCategory]);
 
